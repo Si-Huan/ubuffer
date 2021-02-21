@@ -9,28 +9,28 @@ import (
 const MEMSIZE = 50 * (1 << 20)
 
 type Buffer struct {
-	mem *bytes.Buffer
+	mem  *bytes.Buffer
 	swap *os.File
 }
 
-func NewBuffer(cap int64) *Buffer {
+func NewBuffer(cap int64, tempDir string) *Buffer {
 	var (
-		mem = new(bytes.Buffer)
+		mem           = new(bytes.Buffer)
 		swap *os.File = nil
-		err error
+		err  error
 	)
 	if cap > MEMSIZE {
-		swap, err = ioutil.TempFile("", "ubuffer-*")
-		if err != nil || swap == nil || swap.Close() != nil{
+		swap, err = ioutil.TempFile(tempDir, "ubuffer-*")
+		if err != nil || swap == nil || swap.Close() != nil {
 			return nil
 		}
-		swap, err = os.OpenFile(swap.Name(), os.O_APPEND | os.O_RDWR, 0644)
+		swap, err = os.OpenFile(swap.Name(), os.O_APPEND|os.O_RDWR, 0644)
 		if err != nil {
 			return nil
 		}
 	}
 	return &Buffer{
-		mem: mem,
+		mem:  mem,
 		swap: swap,
 	}
 }

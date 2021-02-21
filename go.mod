@@ -1,3 +1,3 @@
-module github.com/kaiakz/ubuffer
+module github.com/Si-Huan/ubuffer
 
-go 1.14
+go 1.15
