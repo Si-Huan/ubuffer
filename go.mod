@@ -1,3 +1,3 @@
-module github.com/Si-Huan/ubuffer
+module github.com/sihuan/ubuffer
 
-go 1.15
+go 1.16
